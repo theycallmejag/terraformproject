@@ -2,7 +2,7 @@ name: Terraform AWS Workflow
 
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
+  
     inputs:
       tfpath:
         description: 'TF File Path'     
