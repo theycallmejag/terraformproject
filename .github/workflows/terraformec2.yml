@@ -54,7 +54,7 @@ jobs:
     - name: output exitcode
       run: echo ${{ steps.plan.outputs.exitcode }}
 
-       - name: Set IP address as environment variable
+    - name: Set IP address as environment variable
       run: |
             EC2INSTANCE=$(cat output.txt)
             echo "EC2INSTANCE"=${EC2INSTANCE} >> $GITHUB_ENV
