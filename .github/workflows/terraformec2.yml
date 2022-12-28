@@ -46,6 +46,10 @@ jobs:
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: terraform apply -auto-approve -lock=false
 
+    - name: Sleep to allow instance to boot up
+      run: sleep 60s
+      shell: bash  
+
     - name: Set output
       id: set-dns
       run: echo "::set-output name=instance_public_dns::$(terraform output instance_public_ip)"
