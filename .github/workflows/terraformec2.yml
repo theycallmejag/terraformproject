@@ -37,11 +37,9 @@ jobs:
         terraform_version: 1.2.0
         terraform_wrapper: false
 
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
 
-    # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -lock=false
     
@@ -53,6 +51,9 @@ jobs:
     
     - name: output exitcode
       run: echo ${{ steps.plan.outputs.exitcode }}
+
+    - name: Output as a variable
+      run: terraform output -json EC2INSTANCE | jq -r '.[0]' | tee output.txt  
 
     - name: Set IP address as environment variable
       run: |
