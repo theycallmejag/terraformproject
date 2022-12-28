@@ -42,6 +42,13 @@ jobs:
 
     - name: Terraform Plan
       run: terraform plan -lock=false
+
+   - name: Terraform Apply
+      run: terraform apply -auto-approve -input=false -no-color    
+
+  - name: Sleep for 30 seconds
+      run: sleep 90s
+      shell: bash   
     
     - name: output standout
       run: echo ${{ steps.plan.outputs.stdout }}
