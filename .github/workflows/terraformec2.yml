@@ -50,7 +50,7 @@ jobs:
       id: set-dns
       run: |-
             echo "::set-output name=instance_public_dns::$(terraform output instance_public_ip)"
-      working-directory: ./terraform  
+      working-directory: /usr/bin/bash  
 
     - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> $GITHUB_ENV
     
