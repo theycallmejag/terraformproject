@@ -14,59 +14,47 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
 
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Configure AWS Credentials Action For GitHub Actions
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-2 
+        aws-region: us-west-2 
         
     - name: Setup Terraform CLI
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: 1.2.0
-        terraform_wrapper: false
+        terraform_wrapper: false 
 
     - name: Terraform Init
       run: terraform init
 
     - name: Terraform Plan
-      run: terraform plan -lock=false
+      run: terraform plan -input=false
 
-   - name: Terraform Apply
-      run: terraform apply -auto-approve -input=false -no-color    
+    - name: Terraform Apply
+      run: terraform apply -auto-approve -input=false -no-color 
 
-  - name: Sleep for 30 seconds
+    - name: Sleep for 30 seconds
       run: sleep 90s
-      shell: bash   
-    
-    - name: output standout
-      run: echo ${{ steps.plan.outputs.stdout }}
-    
-    - name: output stderr
-      run: echo ${{ steps.plan.outputs.stderr }}
-    
-    - name: output exitcode
-      run: echo ${{ steps.plan.outputs.exitcode }}
+      shell: bash
 
     - name: Output as a variable
-      run: terraform output -json EC2INSTANCE | jq -r '.[0]' | tee output.txt  
+      run: terraform output -json EC2INSTANCE | jq -r '.[0]' | tee output.txt
 
     - name: Set IP address as environment variable
       run: |
             EC2INSTANCE=$(cat output.txt)
             echo "EC2INSTANCE"=${EC2INSTANCE} >> $GITHUB_ENV
-    
     - name: copy file via ssh key
       uses: appleboy/scp-action@master
       with:          
