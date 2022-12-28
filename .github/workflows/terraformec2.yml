@@ -42,11 +42,8 @@ jobs:
       run: terraform plan -lock=false
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve -lock=false -no-color 
-
-    - name: Sleep for 30 seconds
-      run: sleep 90s
-      shell: bash
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      run: terraform apply -auto-approve -lock=false
 
     - name: Output as a variable
       run: terraform output -json EC2INSTANCE | jq -r '.[0]' | tee output.txt
