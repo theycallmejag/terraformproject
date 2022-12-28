@@ -43,7 +43,6 @@ jobs:
       run: terraform plan -lock=false
 
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: terraform apply -auto-approve -lock=false
 
     - name: Sleep to allow instance to boot up
