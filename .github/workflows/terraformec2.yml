@@ -54,11 +54,6 @@ jobs:
       run: echo "::set-output name=instance_public_dns::$(terraform output instance_public_ip)"
     
     - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> $GITHUB_ENV
-    
-    - name: Set EC2 instance IP address as environmental variable
-      run: |
-            EC2INSTANCE=$(EC2INSTANCE)
-             echo "EC2INSTANCE"=${EC2INSTANCE} >> $GITHUB_ENV
 
     - name: copy file via ssh key
       uses: appleboy/scp-action@master
