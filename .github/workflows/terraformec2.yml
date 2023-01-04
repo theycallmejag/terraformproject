@@ -43,11 +43,7 @@ jobs:
       run: terraform plan -lock=false
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve -lock=false
-
-    - name: Sleep to allow instance to boot up
-      run: sleep 60s
-      shell: bash  
+      run: terraform apply -auto-approve -lock=false  
 
     - name: Set output
       id: set-dns
@@ -64,7 +60,7 @@ jobs:
         source: "docker-compose.yml"
         target: "/home/ubuntu/"
 
-    - name: executing remote ssh commands using password
+    - name: run ssh commands using password
       uses: appleboy/ssh-action@master
       with:
         host: ${{ env.EC2INSTANCE }}
