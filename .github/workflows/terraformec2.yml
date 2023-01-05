@@ -60,7 +60,7 @@ jobs:
         source: "docker-compose.yml"
         target: "/home/ubuntu/"
 
-    - name: run ssh commands using password
+    - name: run ssh commands using ssh key
       uses: appleboy/ssh-action@master
       with:
         host: ${{ env.EC2INSTANCE }}
