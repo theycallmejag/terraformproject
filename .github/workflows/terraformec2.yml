@@ -51,6 +51,9 @@ jobs:
     
     - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> $GITHUB_ENV
 
+    - name: install ansible
+      run: sudo apt install ansible
+    
     - name: copy file via ssh key
       uses: appleboy/scp-action@master
       with:          

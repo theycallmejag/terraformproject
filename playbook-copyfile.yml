@@ -1,0 +1,7 @@
+name: Copy file to target servers
+hosts: all
+tasks:
+  - name: Copy file
+    copy:
+      src: docker-compose.yml
+      dest: ~/.
