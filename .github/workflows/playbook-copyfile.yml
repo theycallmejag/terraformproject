@@ -1,7 +1,0 @@
-name: Copy file to target servers
-hosts: all
-tasks:
-  - name: Copy file
-    copy:
-      src: https://github.com/theycallmejag/terraformproject.git/docker-compose.yml
-      dest: ~/.
