@@ -64,4 +64,4 @@ jobs:
     - name: change permissions
       run: chmod 400 key.pem
     - name: Run playbook
-      run: ansible-playbook -i dev.inventory --private-key key.pem deploy-web.yml -vv
+      run: ansible-playbook -i dev.inventory --private-key key.pem playbook-copyfile.yml -vv

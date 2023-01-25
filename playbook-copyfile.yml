@@ -1,7 +1,7 @@
-name: Copy file to target servers
-hosts: all
-tasks:
-  - name: Copy file
-    copy:
-      src: docker-compose.yml
-      dest: ~/.
+---
+- name: Deploy Web Server
+  hosts: web-server-nodes
+  roles:
+    - web-server
+  tags: web-server
+  become: true
