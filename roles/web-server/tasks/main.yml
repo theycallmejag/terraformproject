@@ -1,0 +1,8 @@
+- name: Copy docker files to ec2
+  copy:
+    src: "{{ item }}"
+    dest: /var/www/html/
+    owner: root
+    mode: 644
+  with_fileglob:
+    - docker-compose.yml
