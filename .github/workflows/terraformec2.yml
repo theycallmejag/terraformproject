@@ -54,22 +54,14 @@ jobs:
     - name: install ansible
       run: sudo apt install ansible
     
-    - name: copy file via ssh key
-      uses: appleboy/scp-action@master
-      with:          
-        host: ${{ env.EC2INSTANCE }}
-        username: ubuntu
-        key: ${{ secrets.SSH_KEY }}
-        source: "docker-compose.yml"
-        target: "/home/ubuntu/"
-
-    - name: run ssh commands using ssh key
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ env.EC2INSTANCE }}
-        username: ubuntu
-        key: ${{ secrets.SSH_KEY }}
-        script: | 
-                 sudo apt install docker -y
-                 sudo apt install docker-compose -y
-                 docker-compose up -d
+    - name: install ansible
+      run: sudo apt install ansible
+    - name: save keyfile
+      run: 'echo "$SSH_KEY" > key.pem'
+      shell: bash
+      env:
+        SSH_KEY: ${{secrets.AWS_PRIVATE_KEY}}
+    - name: change permissions
+      run: chmod 400 key.pem
+    - name: Run playbook
+      run: ansible-playbook -i dev.inventory --private-key key.pem deploy-web.yml -vv
