@@ -1,6 +1,6 @@
-resource "aws_s3_bucket" "jags_handy_dandy_bucket" {
+resource "aws_s3_bucket" "jags-levlup-terraform-state" {
 
-     bucket = "jags-handy_dandy_bucket"
+     bucket = "jags-levlup-terraform-state"
      lifecycle {
          prevent_destroy = true
      }
