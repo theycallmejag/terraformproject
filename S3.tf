@@ -1,6 +1,6 @@
-resource "aws_s3_bucket" "jags-levlup-terraform-state" {
+resource "aws_s3_bucket" "jags-terraform-bucket-v1" {
 
-     bucket = "jags-levlup-terraform-state"
+     bucket = "jags-terraform-bucket-v1"
      lifecycle {
          prevent_destroy = true
      }
