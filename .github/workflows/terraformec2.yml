@@ -50,6 +50,8 @@ jobs:
       run: echo "::set-output name=instance_public_dns::$(terraform output instance_public_ip)"
     
     - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> $GITHUB_ENV
+    
+    - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> dev.inventory
 
     - name: install ansible
       run: sudo apt install ansible

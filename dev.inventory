@@ -1,6 +1,5 @@
 
 [web-server-nodes]
-3.238.171.47
 
 [all:vars]
 ansible_user=ubuntu
