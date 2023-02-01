@@ -1,7 +1,7 @@
 - name: Copy docker files to ec2
   copy:
     src: "{{ item }}"
-    dest: /var/www/html/
+    dest: ~/.
     owner: root
     mode: 644
   with_fileglob:
