@@ -45,9 +45,19 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve -lock=false  
     
-    - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> $GITHUB_ENV
+#    - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> $GITHUB_ENV
     
-    - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> dev.inventory
+#    - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> dev.inventory
+
+    - name: Output as a variable
+      run: terraform output -json EC2INSTANCE | jq -r '.[0]' | tee output.txt
+
+    - name: Set IP address as environment variable
+      run: |
+            EC2INSTANCE=$(cat output.txt)
+            echo "EC2INSTANCE"=${EC2INSTANCE} >> $GITHUB_ENV
+    - name: add IP address to dev.inventory file
+      run: cat output.txt >> dev.inventory
 
     - name: install ansible
       run: sudo apt install ansible
