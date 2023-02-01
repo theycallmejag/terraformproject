@@ -49,17 +49,17 @@ jobs:
     
 #    - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> dev.inventory
 
-    - name: Sleep for 90 seconds
-      run: sleep 90s
-      shell: bash
+#    - name: Sleep for 30 seconds
+#      run: sleep 30s
+#      shell: bash
 
     - name: Output as a variable
-      run: terraform output -json EC2INSTANCE | jq -r '.[0]' | tee output.txt
+      run: terraform output -json ec2instance | jq -r '.[0]' | tee output.txt
 
     - name: Set IP address as environment variable
       run: |
-            EC2INSTANCE=$(cat output.txt)
-            echo "EC2INSTANCE"=${EC2INSTANCE} >> $GITHUB_ENV
+            ec2instance=$(cat output.txt)
+            echo "ec2instance"=${ec2instance} >> $GITHUB_ENV
     - name: add IP address to dev.inventory file
       run: cat output.txt >> dev.inventory
 
