@@ -49,6 +49,10 @@ jobs:
     
 #    - run: echo SERVER_PUBLIC_IP=${{ needs.deploy-infra.outputs.SERVER_PUBLIC_DNS }} >> dev.inventory
 
+    - name: Sleep for 90 seconds
+      run: sleep 90s
+      shell: bash
+
     - name: Output as a variable
       run: terraform output -json EC2INSTANCE | jq -r '.[0]' | tee output.txt
 
