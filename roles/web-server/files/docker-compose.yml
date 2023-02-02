@@ -1,0 +1,7 @@
+version: "3"
+services:
+  java-app:
+    image: theycallmejag/dockerhub-project:0.0.3
+    ports:
+      - "8080:8080"
+

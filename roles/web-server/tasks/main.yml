@@ -1,8 +1,8 @@
 - name: Copy docker files to ec2
   copy:
-    src: /docker-compose.yml
+    src: {{ item }}
     dest: /home/ubuntu
     owner: ubuntu
     mode: 644
   with_fileglob:
-    - docker-compose.yml
+    - files/*
