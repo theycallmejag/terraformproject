@@ -1,6 +1,6 @@
 - name: Copy docker files to ec2
   copy:
-    src: {{ item }}
+    src: "{{ item }}"
     dest: /home/ubuntu
     owner: ubuntu
     mode: 644
