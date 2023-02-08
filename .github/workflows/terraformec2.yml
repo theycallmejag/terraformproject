@@ -63,8 +63,8 @@ jobs:
       run: |
             EC2INSTANCE=$(cat output.txt)
             echo "EC2INSTANCE"=${EC2INSTANCE} >> $GITHUB_ENV
-    - name: add IP adress to dev.inventory file
-     # run: cat output.txt >> dev.inventory
+            
+    - name: add IP address to dev.inventory file
       run: sed -i "2r output.txt" dev.inventory
 
     - name: install ansible
