@@ -52,18 +52,11 @@ jobs:
     - name: Output as a variable
       run: terraform output -json ec2instance | jq -r '.[0]' | >> git tee output.txt
 
-   # - name: Set IP address as environment variable
-   #   run: |
-   #         ec2instance=$(cat output.txt)
-   #         echo "ec2instance"=${ec2instance} >> $GITHUB_ENV
-   # - name: add IP address to dev.inventory file
-   #   run: cat output.txt >> dev.inventory
-
     - name: Set IP address as environment variable
       run: |
             EC2INSTANCE=$(cat output.txt)
             echo "EC2INSTANCE"=${EC2INSTANCE} >> $GITHUB_ENV
-            
+
     - name: add IP address to dev.inventory file
       run: sed -i "2r output.txt" dev.inventory
 
