@@ -95,7 +95,7 @@ resource "aws_security_group" "terraform_sg" {
 }
 
 resource "aws_instance" "web_instance" {
-  ami           = "ami-0b9d7a9808acc4c16"
+  ami           = "ami-05803413c51f242b7"
   instance_type = "t2.micro"
   key_name      = "ohio-keypair"
 
